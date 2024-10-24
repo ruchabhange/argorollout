@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: nginx
-  namespace: blue-green
+  namespace: canary
 spec:
   replicas: 3
   strategy:
@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: ruchabhange/phpsampleapplication:1
         ports:
         - containerPort: 80
