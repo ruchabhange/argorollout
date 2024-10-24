@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx
+  namespace: blue-green  # Specify your namespace
 spec:
   selector:
     app: nginx
@@ -9,4 +10,19 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: ClusterIP
+  type: ClusterIP  # Change to LoadBalancer if needed for external access
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-preview
+  namespace: blue-green  # Specify your namespace
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP  # Change to LoadBalancer if needed for external access
