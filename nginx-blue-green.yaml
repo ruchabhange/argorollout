@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-rollout-blue-green
+  namespace: argocd  # Ensure this matches your Argo CD installation namespace
+spec:
+  project: default  # Specify the project to which the application belongs
+  source:
+    repoURL: https://github.com/ruchabhange/argorollout.git
+    path: nginx-rollout/overlays/production
+    targetRevision: HEAD  # This can be a specific branch or commit if desired
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blue-green
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
+    automated:
+      prune: true
+      selfHeal: true
