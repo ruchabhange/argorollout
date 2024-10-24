@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-rollout-blue-green
+  name: nginx-rollout
   namespace: argocd  # Ensure this matches your Argo CD installation namespace
 spec:
   project: default  # Specify the project to which the application belongs
